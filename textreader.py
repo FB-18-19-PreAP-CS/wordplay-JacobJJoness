@@ -44,15 +44,63 @@ def has_no_e(word):
     if 'e' not in word:
         return True
     else:
-        return None
+        return False
             
         
 def avoid(forbidden,word):
+    '''
+    >>> avoid('abc','abcd')
+    False
+    
+    >>> avoid('abc','jacob')
+    False
+    
+    >>> avoid('abc','logn')
+    True
+    '''
     for letter in word:
         if letter in forbidden:
             return False
-        else:
-            return True
+    return True
+        
+def avoid_count():
+    forbidden_let = input('Enter list of letters')
+    count_avoid = 0
+    with open('words.txt') as file:
+        for line in file:
+            for word in line.strip().split():
+                if avoid(forbidden_let, word):
+                        count_avoid +=1
+    print(count_avoid)
+                        
+                        
+def uses_only(letters, words):
+     '''
+    >>> uses_only('abc','abcd')
+    False
+    
+    >>> uses_only('abc','acb')
+    False
+    
+    >>> uses_only('abc','logn')
+    True
+    '''
+    for letter in word:
+        if letters.lower() not in word.lower():
+            return False
+        return True
+    
+    
+def how_many_uses():
+    count = 0
+    letter_lst = input('Enter 5 letters')
+    with open('words.txt') as file:
+        for line in file:
+            for word in line.strip().split():
+                if uses_only(letter_lst,word):
+                    count+=1
+    print(count)
+                   
                 
                 
                 
@@ -61,4 +109,6 @@ def avoid(forbidden,word):
         
         
 if __name__ == '__main__':
-    avoid('abcde','lever')
+    import doctest
+    doctest.testmod()
+    how_many_uses()
